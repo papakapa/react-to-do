@@ -9,7 +9,7 @@ const ToDoList = () => {
 
   const rerenderTodos = useCallback(() => {
     if (todoArr.length !== 0) {
-      return todoArr.map((todo, index) => <ToDo name={todo.name}/>);
+      return todoArr.map((todo, index) => <ToDo name={todo.title}/>);
     }
     return null;
   }, [todoArr]);

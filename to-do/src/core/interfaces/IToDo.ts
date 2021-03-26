@@ -1,3 +1,4 @@
 export interface IToDo {
-    name: string;
+    title: string;
+    group: string;
 }
