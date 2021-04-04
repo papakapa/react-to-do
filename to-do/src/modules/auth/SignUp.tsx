@@ -1,20 +1,45 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { SignUpForm } from './StyledSignUpForm';
+import React, {useRef} from 'react';
+import {useForm} from 'react-hook-form';
+import {SignUpForm} from './StyledSignUpForm';
+import {IUserToCreate} from '../../core/interfaces/IUser';
+import {useDispatch} from "react-redux";
+import {signUp} from "../../redux/auth/auth.actions";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const {register, handleSubmit, watch} = useForm<IUserToCreate>();
 
-  const {register, handleSubmit} = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
 
-  const onSignUp = (data: any) => console.log(data);
+  const onSignUp = (data: IUserToCreate) => dispatch(signUp(data));
 
   return (
     <SignUpForm onSubmit={handleSubmit(onSignUp)}>
-      <input type='text' name='firstName' ref={register} placeholder='First name'/>
-      <input type='text' name='secondName' ref={register} placeholder='Second name'/>
-      <input type='text' name='login' ref={register} placeholder='Login'/>
-      <input type='password' name='password' ref={register} placeholder='Password'/>
-      <input type='password' name='validPassword' ref={register} placeholder='Valid your password'/>
+      <input
+        type='text'
+        name='login'
+        ref={register({required: true})}
+        placeholder='Login'
+        autoComplete='off'
+      />
+      <input
+        type='password'
+        name='password'
+        ref={register({required: true})}
+        placeholder='Password'
+        autoComplete='off'
+      />
+      <input
+        type='password'
+        name='validPassword'
+        ref={register({
+          required: true,
+          validate: value => value === password.current
+        })}
+        placeholder='Valid your password'
+        autoComplete='off'
+      />
       <button type='submit'>SignUp</button>
     </SignUpForm>
   )

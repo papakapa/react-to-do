@@ -1,16 +1,20 @@
 import React from 'react';
-import {HomeWrapper} from './StyledHome';
+import {ContentWrapper, HomeWrapper} from './StyledHome';
 import ToDoGenerator from '../../components/ToDoGenerator';
 import ToDoList from '../../components/ToDoList';
 import Popup from '../../components/popup/Popup';
+import Header from './Header';
 
 const HomePage = () => {
   return (
     <HomeWrapper>
-      <h1>Todos</h1>
-      <ToDoGenerator />
-      <ToDoList />
-      <Popup />
+      <Header />
+      <ContentWrapper>
+        <h1>Todos</h1>
+        <ToDoGenerator/>
+        <ToDoList/>
+        <Popup/>
+      </ContentWrapper>
     </HomeWrapper>
   )
 };

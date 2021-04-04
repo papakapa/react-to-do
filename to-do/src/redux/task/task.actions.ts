@@ -4,6 +4,7 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
 import axios from "axios";
 import { setShouldShowPopup } from "../popup/popup.actions";
+import {setUserTodos} from "../user/user.actions";
 
 export const addTodo = (todo: IToDo): TaskActionsTypes => ({type: ADD_TASK, payload: todo});
 
@@ -17,7 +18,9 @@ export const deleteTodo = (name: string): TaskActionsTypes => ({type: DELETE_TAS
 
 export const setTodos = (todos: IToDo[]): TaskActionsTypes => ({type: SET_TASKS, payload: todos});
 
-export const getTodoFromDB = (): ThunkAction<any, RootState, any, any> => async dispatch => {
-    const res = await axios.get('http://localhost:1234/todo/all');
-    res.data && dispatch(setTodos(res.data));
+export const getTodoFromDB = (login: string): ThunkAction<any, RootState, any, any> => async dispatch => {
+    if (login) {
+        const res = await axios.post('http://localhost:1234/todo/userTodos', {login : login});
+        res.data && dispatch(setUserTodos(res.data));
+    }
 };

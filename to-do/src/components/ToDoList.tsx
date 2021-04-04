@@ -1,11 +1,11 @@
 import React, {useCallback} from 'react';
 import { useSelector } from 'react-redux';
-import {getAllTodos} from "../redux/task/task.selector";
 import {StyledTodoList} from './StyledTodoList';
 import ToDo from "./ToDo";
+import {getUserTodos} from "../redux/user/user.selector";
 
 const ToDoList = () => {
-  const todoArr = useSelector(getAllTodos);
+  const todoArr = useSelector(getUserTodos);
 
   const rerenderTodos = useCallback(() => {
     if (todoArr.length !== 0) {

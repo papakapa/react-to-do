@@ -5,10 +5,12 @@ import { getTodoFromDB } from "./redux/task/task.actions";
 import {validateToken} from "./redux/auth/auth.actions";
 import {getIsAuth} from "./redux/auth/auth.selector";
 import {useRoutes} from "./core/routes/routes";
+import {getUserLogin} from "./redux/user/user.selector";
 
 function App() {
   const dispatch = useDispatch();
   const isAuth = useSelector(getIsAuth);
+  const userLogin = useSelector(getUserLogin);
   const routes = useRoutes(isAuth);
 
   useEffect(() => {
@@ -16,8 +18,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    dispatch(getTodoFromDB());
-  }, []);
+    dispatch(getTodoFromDB(userLogin));
+  }, [userLogin]);
 
   return (
     <div className="App">

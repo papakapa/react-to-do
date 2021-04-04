@@ -21,6 +21,7 @@ const SignInForm  = () => {
         name='login'
         ref={register({required: true})}
         placeholder='login'
+        autoComplete='off'
       />
       <NavLink to='/auth/reg'>Not Have Account?</NavLink>
       <input
@@ -28,6 +29,7 @@ const SignInForm  = () => {
         name='password'
         ref={register({required: true})}
         placeholder='password'
+        autoComplete='off'
       />
       <button type='submit'>SignIn</button>
     </LoginForm>

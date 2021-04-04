@@ -18,8 +18,8 @@ export class AuthController{
 
   @UseGuards(JwtAuthGuard)
   @Get('isAuth')
-  validateToken() {
-    return {status: true};
+  validateToken(@Request() req) {
+    return req.user;
   }
 
   @Post('signUp')

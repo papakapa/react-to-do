@@ -1,5 +1,7 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import {Document, Types} from 'mongoose';
+import {ITodo} from "../../todos/interfaces/ITodo";
+import {Todo} from "../../todos/schemas/todo.schema";
 
 export type UserDocument = User & Document;
 
@@ -10,6 +12,12 @@ export class User {
 
   @Prop()
   password: string
+
+  @Prop({
+    type: Types.ObjectId,
+    ref: `${Todo.name}`
+  })
+  todos: ITodo[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
