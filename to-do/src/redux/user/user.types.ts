@@ -12,9 +12,10 @@ interface SET_USER_TODO {
   type: typeof SET_USER_TODOS;
   payload: IToDo[];
 }
+
 export interface UserState {
   login: string;
   todos: IToDo[]
 }
 
-export type UserActionsType = SET_USER_LOG | SET_USER_TODO;
+export type UserActionsType = SET_USER_LOG | SET_USER_TODO ;

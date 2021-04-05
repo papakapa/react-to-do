@@ -1,15 +1,23 @@
 import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../redux/task/task.selector';
-import { AddToDoForm, StyledAddHeader, StyledAddInputField, StyledAddToDoPopup, StyledButtonGroup } from './StyledToDoPopup';
-import { setShouldShowPopup } from "../../redux/popup/popup.actions";
-import { useForm } from "react-hook-form";
-import { IToDo } from "../../core/interfaces/IToDo";
-import { addTodoToDB } from "../../redux/task/task.actions";
+import { setShouldShowPopup } from '../../redux/popup/popup.actions';
+import { getUserLogin } from '../../redux/user/user.selector';
+import { IToDo } from '../../core/interfaces/IToDo';
+import {
+  AddToDoForm,
+  StyledAddHeader,
+  StyledAddInputField,
+  StyledAddToDoPopup,
+  StyledButtonGroup,
+} from './StyledToDoPopup';
+import { addTodoToUser } from '../../redux/user/user.actions';
 
 const AddToDoPopup = () => {
   const dispatch = useDispatch();
   const groups = useSelector(getGroups);
+  const userLogin = useSelector(getUserLogin);
 
   const {register, handleSubmit, errors} = useForm<IToDo>();
 
@@ -19,7 +27,7 @@ const AddToDoPopup = () => {
 
   const onCancel = () => dispatch(setShouldShowPopup(false));
 
-  const onAdd = (data: IToDo) => dispatch(addTodoToDB(data));
+  const onAdd = (data: IToDo) => dispatch(addTodoToUser(userLogin, data));
 
   return (
     <StyledAddToDoPopup>
