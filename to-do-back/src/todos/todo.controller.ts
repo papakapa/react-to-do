@@ -30,4 +30,10 @@ export class TodoController {
   getUserTodos(@Body('login') login: string) {
     return this.todoService.getUserTodos(login);
   }
+
+  @Post('deleteUserTodo')
+  async removeUserTodo(@Body('login') login: string, @Body('todo') todo: string): Promise<User> {
+    return this.todoService.deleteTask(login, todo);
+  }
+
 }

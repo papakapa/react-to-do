@@ -14,3 +14,10 @@ export const addTodoToUser = (login: string, todo: IToDo): ThunkAction<any, any,
     dispatch(setShouldShowPopup(false));
   }
 };
+
+export const deleteUserTodo = (login: string, todo: string): ThunkAction<any, any, any, any> => async dispatch => {
+  const res = await axios.post('http://localhost:1234/todo/deleteUserTodo', {login: login, todo: todo});
+  if (res.data) {
+    dispatch(setUserTodos(res.data.todos));
+  }
+};

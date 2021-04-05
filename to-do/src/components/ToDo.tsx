@@ -1,16 +1,17 @@
 import React from 'react';
 import { StyledTodo, StyledToDoButton } from './StyledTodo';
 import {useDispatch} from "react-redux";
-import {deleteTodo} from "../redux/task/task.actions";
+import { deleteUserTodo } from '../redux/user/user.actions';
 
 interface ToDoComponent {
   name: string;
+  userLogin: string;
 }
 
-const ToDo: React.FC<ToDoComponent> = ({name}) => {
+const ToDo: React.FC<ToDoComponent> = ({name, userLogin}) => {
   const dispatch = useDispatch();
     const onDeleteToDo = () => {
-        dispatch(deleteTodo(name));
+        dispatch(deleteUserTodo(userLogin, name));
     }
 
     return (

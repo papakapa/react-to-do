@@ -31,4 +31,11 @@ export class TodoService {
     const user = await this.userModel.findOne({login: login});
     return user.todos;
   }
+
+  async deleteTask(login: string, task: string) {
+    const user = await this.userModel.findOne({login: login});
+    const todos = user.todos;
+    user.todos = todos.filter(el => el.title !== task);
+    return user.save();
+  }
 }
