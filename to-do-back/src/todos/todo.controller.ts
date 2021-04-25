@@ -11,9 +11,14 @@ export class TodoController {
   }
 
   @Get('all')
-  async getAll(): Promise<Todo[]> {
+  async getAll(): Promise<ClientTodoDto[]> {
     const notParsedTodos = await this.todoService.getAllTodos();
-    return notParsedTodos.map((el) => new ClientTodoDto({title: el.title, group: el.group}));
+    return notParsedTodos.map((el) => new ClientTodoDto({
+      title: el.title,
+      group: el.group,
+      completed: el.completed,
+      time: el.time
+    }));
   }
 
   @Post('create')
