@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
+import 'react-datepicker/dist/react-datepicker.css';
 import {useDispatch, useSelector} from "react-redux";
 import { getTodoFromDB } from "./redux/task/task.actions";
 import {validateToken} from "./redux/auth/auth.actions";

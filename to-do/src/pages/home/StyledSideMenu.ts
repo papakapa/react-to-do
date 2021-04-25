@@ -25,3 +25,10 @@ export const StyledMenu = styled.div`
     background: black;
   }
 `;
+
+
+export const StyledMenuTitle = styled.div`
+ font-size: 20px;
+ font-weight: normal;
+ margin: 10px auto;
+`;

@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {useSelector} from 'react-redux';
 import {StyledCompletedTitle, StyledTodoList, StyledTodoLists} from './StyledTodoList';
 import ToDo from "./ToDo";
+import moment from "moment";
 import {getUserLogin, getUserTodos} from '../redux/user/user.selector';
 
 const ToDoList = () => {
@@ -15,6 +16,22 @@ const ToDoList = () => {
     if (todoArr.length !== 0) {
       if (contentType === 'home') {
         const result = todoArr.filter(el => !el.completed);
+        return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      }
+      if (contentType === 'limit') {
+        const result = todoArr.filter(el => !el.completed && el.time === 'noTime');
+        return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      }
+      if (contentType === 'today') {
+        const result = todoArr.filter(el => {
+          return !el.completed && el.time !== 'noTime' && moment(el.time).isSame(moment(), 'day');
+        });
+        return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      }
+      if (contentType === 'tomorrow') {
+        const result = todoArr.filter(el => {
+          return !el.completed && el.time !== 'noTime' && moment(el.time).isSame(moment().add(1,'days'), 'day');
+        });
         return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
       }
       const filteredTodos = todoArr.filter(el => !el.completed && el.group === contentType);

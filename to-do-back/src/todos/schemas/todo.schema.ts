@@ -13,6 +13,9 @@ export class Todo {
 
   @Prop()
   completed: boolean
+
+  @Prop()
+  time: string
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
