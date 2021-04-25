@@ -8,13 +8,20 @@ const ToDoList = () => {
   const todoArr = useSelector(getUserTodos);
   const userLogin = useSelector(getUserLogin);
 
+  const link = window.location.href.split('/');
+  const contentType = link[link.length - 1];
+
   const rerenderTodos = useCallback(() => {
     if (todoArr.length !== 0) {
-      const result = todoArr.filter(el => !el.completed);
-      return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      if (contentType === 'home') {
+        const result = todoArr.filter(el => !el.completed);
+        return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      }
+      const filteredTodos = todoArr.filter(el => !el.completed && el.group === contentType);
+      return filteredTodos.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
     }
     return null;
-  }, [todoArr, userLogin]);
+  }, [todoArr, userLogin, contentType]);
 
   const rerenderCompleted = useCallback(() => {
     if (todoArr.length !== 0) {
@@ -32,10 +39,10 @@ const ToDoList = () => {
       <StyledTodoList>
         {rerenderTodos()}
       </StyledTodoList>
-      <StyledTodoList>
+      {contentType === 'home' && <StyledTodoList>
         <StyledCompletedTitle>Completed Tasks</StyledCompletedTitle>
         {rerenderCompleted()}
-      </StyledTodoList>
+      </StyledTodoList>}
     </StyledTodoLists>
   );
 };
