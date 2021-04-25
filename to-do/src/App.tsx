@@ -15,11 +15,11 @@ function App() {
 
   useEffect(() => {
     dispatch(validateToken());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getTodoFromDB(userLogin));
-  }, [userLogin]);
+  }, [userLogin,dispatch]);
 
   return (
     <div className="App">

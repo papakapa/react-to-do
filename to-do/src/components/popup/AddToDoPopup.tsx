@@ -19,7 +19,7 @@ const AddToDoPopup = () => {
   const groups = useSelector(getGroups);
   const userLogin = useSelector(getUserLogin);
 
-  const {register, handleSubmit, errors} = useForm<IToDo>();
+  const {register, handleSubmit} = useForm<IToDo>();
 
   const rerenderGroups = useCallback(() => {
     return groups.map((el) => <option value={el}>{el}</option>)
@@ -27,7 +27,7 @@ const AddToDoPopup = () => {
 
   const onCancel = () => dispatch(setShouldShowPopup(false));
 
-  const onAdd = (data: IToDo) => dispatch(addTodoToUser(userLogin, data));
+  const onAdd = (data: IToDo) => dispatch(addTodoToUser(userLogin, {...data, completed: false}));
 
   return (
     <StyledAddToDoPopup>

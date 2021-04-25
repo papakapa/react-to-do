@@ -38,4 +38,16 @@ export class TodoService {
     user.todos = todos.filter(el => el.title !== task);
     return user.save();
   }
+
+  async onComplete(login: string, task: string) {
+    const user = await this.userModel.findOne({login: login});
+    const todos = user.todos;
+    user.todos = todos.map(el => {
+      if (el.title === task) {
+        return {...el, completed: true};
+      }
+      return el;
+    });
+    return user.save();
+  }
 }

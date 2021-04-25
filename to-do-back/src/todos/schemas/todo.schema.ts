@@ -10,6 +10,9 @@ export class Todo {
 
   @Prop()
   group: string
+
+  @Prop()
+  completed: boolean
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);

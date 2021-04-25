@@ -1,25 +1,39 @@
 import React from 'react';
-import { StyledTodo, StyledToDoButton } from './StyledTodo';
+import {StyledTodo, StyledToDoButton, StyledTodoInfo, TodoLabel} from './StyledTodo';
 import {useDispatch} from "react-redux";
-import { deleteUserTodo } from '../redux/user/user.actions';
+import {completeUserTodo, deleteUserTodo} from '../redux/user/user.actions';
 
 interface ToDoComponent {
   name: string;
   userLogin: string;
+  completed: boolean;
 }
 
-const ToDo: React.FC<ToDoComponent> = ({name, userLogin}) => {
+const ToDo: React.FC<ToDoComponent> = ({name, userLogin, completed}) => {
   const dispatch = useDispatch();
-    const onDeleteToDo = () => {
-        dispatch(deleteUserTodo(userLogin, name));
-    }
+  const onDeleteToDo = () => {
+    dispatch(deleteUserTodo(userLogin, name));
+  }
 
-    return (
-        <StyledTodo>
-            <p>{name}</p>
-          <StyledToDoButton className="material-icons" onClick={onDeleteToDo}>delete</StyledToDoButton>
-        </StyledTodo>
-    );
+  const onComplete = () => {
+    dispatch(completeUserTodo(userLogin, name));
+  }
+
+  return (
+    <StyledTodo>
+      <StyledTodoInfo>
+        <input
+          type='checkbox'
+          name='completed'
+          defaultChecked={completed}
+          onChange={onComplete}
+          disabled={completed}
+        />
+        <TodoLabel htmlFor='completed'>{name}</TodoLabel>
+      </StyledTodoInfo>
+      <StyledToDoButton className="material-icons" onClick={onDeleteToDo}>delete</StyledToDoButton>
+    </StyledTodo>
+  );
 };
 
 export default ToDo;
