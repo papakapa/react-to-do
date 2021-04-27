@@ -13,9 +13,16 @@ const ToDoList = () => {
   const contentType = link[link.length - 1];
 
   const rerenderTodos = useCallback(() => {
+    console.log('rerender');
     if (todoArr.length !== 0) {
       if (contentType === 'home') {
         const result = todoArr.filter(el => !el.completed);
+        return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
+      }
+      if (contentType === 'overdue') {
+        const result = todoArr.filter(el => {
+          return !el.completed && el.time !== 'noTime' && moment(el.time).isBefore(moment(), 'day');
+        });
         return result.map((todo) => <ToDo name={todo.title} userLogin={userLogin} completed={false}/>);
       }
       if (contentType === 'limit') {

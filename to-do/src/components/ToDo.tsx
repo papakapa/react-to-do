@@ -18,14 +18,13 @@ const ToDo: React.FC<ToDoComponent> = ({name, userLogin, completed}) => {
   const onComplete = () => {
     dispatch(completeUserTodo(userLogin, name));
   }
-
   return (
     <StyledTodo>
       <StyledTodoInfo>
         <input
           type='checkbox'
           name='completed'
-          defaultChecked={completed}
+          checked={completed}
           onChange={onComplete}
           disabled={completed}
         />

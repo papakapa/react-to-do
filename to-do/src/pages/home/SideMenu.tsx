@@ -14,6 +14,8 @@ const SideMenu = () => {
       <NavLink to='/home/tomorrow'>Tomorrow</NavLink>
       <NavLink to='/home/week'>On week</NavLink>
       <NavLink to='/home/limit'>No Limit</NavLink>
+      <StyledMenuTitle>Other</StyledMenuTitle>
+      <NavLink to='/home/overdue'>Overdue</NavLink>
     </StyledMenu>
   );
 };
