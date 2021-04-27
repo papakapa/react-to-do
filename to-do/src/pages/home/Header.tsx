@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {signOut} from '../../redux/auth/auth.actions';
-import {StyledHeader} from './StyledHeader';
+import {StyledExitButton, StyledHeader} from './StyledHeader';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <button onClick={logOut}>Выйти</button>
+      <StyledExitButton onClick={logOut}>Выйти</StyledExitButton>
     </StyledHeader>
   );
 };

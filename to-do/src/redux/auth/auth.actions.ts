@@ -38,12 +38,12 @@ export const signIn = (user: IUserToSignIn): ThunkAction<any, RootState, any, an
   }
 };
 
-export const signUp = (user: IUserToCreate): ThunkAction<any, any, any, any> => async () => {
+export const signUp = (user: IUserToCreate, setIsCreated: any): ThunkAction<any, any, any, any> => async () => {
   const res = await axios.post('http://localhost:1234/auth/signUp', { user : {
       login: user.login,
       password: user.password
     }});
-  console.log(res.data);
+  res.status !== 500 && setIsCreated(true);
 };
 
 export const signOut = ():ThunkAction<any, any, any, any> => async dispatch => {

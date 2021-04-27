@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { IUserToSignIn } from '../../core/interfaces/IUser';
 import { signIn } from '../../redux/auth/auth.actions';
-import { LoginForm } from './StyledSignInForm';
+import { LoginForm, StyledLogButton } from './StyledSignInForm';
 import { NavLink } from 'react-router-dom';
 
 const SignInForm  = () => {
@@ -23,7 +23,6 @@ const SignInForm  = () => {
         placeholder='login'
         autoComplete='off'
       />
-      <NavLink to='/auth/reg'>Not Have Account?</NavLink>
       <input
         type='password'
         name='password'
@@ -31,7 +30,8 @@ const SignInForm  = () => {
         placeholder='password'
         autoComplete='off'
       />
-      <button type='submit'>SignIn</button>
+      <NavLink to='/auth/reg'>Not Have Account?</NavLink>
+      <StyledLogButton type='submit'>SignIn</StyledLogButton>
     </LoginForm>
   );
 };
