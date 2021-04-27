@@ -14,3 +14,13 @@ export const StyledTodo = styled.div`
 export const StyledToDoButton = styled.span`
   cursor: pointer;
 `;
+
+export const StyledTodoInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TodoLabel = styled.label`
+  margin-left: 8px;
+`;

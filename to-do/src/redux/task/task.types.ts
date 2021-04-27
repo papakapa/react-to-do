@@ -1,7 +1,8 @@
 import {IToDo} from '../../core/interfaces/IToDo';
 
 export const ADD_TASK = "ADD_TASK";
-export const DELETE_TASK = "DELETE_TASK"
+export const DELETE_TASK = "DELETE_TASK";
+export const SET_TASKS = "SET_TASKS";
 
 interface ADD_TODO {
     type: typeof ADD_TASK;
@@ -13,8 +14,14 @@ interface DELETE_TODO {
     payload: string;
 }
 
-export interface TaskState {
-    tasks: IToDo[];
+interface SET_TODOS {
+    type: typeof SET_TASKS;
+    payload: IToDo[];
 }
 
-export type TaskActionsTypes = ADD_TODO | DELETE_TODO;
+export interface TaskState {
+    tasks: IToDo[];
+    groups: string[];
+}
+
+export type TaskActionsTypes = ADD_TODO | DELETE_TODO | SET_TODOS;

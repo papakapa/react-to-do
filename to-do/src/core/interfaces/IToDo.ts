@@ -1,3 +1,6 @@
 export interface IToDo {
-    name: string;
+    title: string;
+    group: string;
+    completed: boolean;
+    time: string;
 }
